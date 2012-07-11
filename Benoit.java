@@ -63,7 +63,7 @@ public class Benoit {
 		mandelbrot.setSize(800,800);
 		framer.getContentPane().add(mandelbrot);
 		framer.setVisible(true);
-		framer.setSize(900,900);
+		framer.setSize(802,900);
 		class clicklistener implements ActionListener{
 
 			@Override
