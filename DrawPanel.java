@@ -124,8 +124,8 @@ public class DrawPanel extends JPanel {
 				x = balrogex;
 			}
 			for(int i = 0; i<Benoit.wizard; i++){
-				currentxt = (powerComplexReal(currentx, currenty, power) + x/(currentx*currentx));
-				currenty = (powerComplexImaj(currentx, currenty,power) + y/(currenty*currenty));
+				currentxt = (powerComplexReal(currentx, currenty, power)) + x;
+				currenty = (powerComplexImaj(currentx, currenty,power)) + y;
 				currentx=currentxt;
 				count++;
 				if(Math.pow(currentx, 2) + Math.pow(currenty, 2) > 4){
