@@ -54,7 +54,8 @@ public class Benoit {
 		mandelbrot.setSize(800,800);
 		framer.getContentPane().add(mandelbrot);
 		framer.setVisible(true);
-		framer.setSize(802,900);
+		framer.setSize(802,859);
+		framer.setResizable(false);
 		class MouseAction implements MouseListener{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -147,12 +148,14 @@ public class Benoit {
 					}
 				}
 				if(arg0.getKeyCode()==83){
+					System.out.println("WAIT! -- SAVING FILE.");
 					try{
 						DrawPanel.save(JOptionPane.showInputDialog("Please enter the filename:"), Integer.parseInt(JOptionPane.showInputDialog("Please enter the x res:")), Integer.parseInt(JOptionPane.showInputDialog("Please enter the y res:")));
 					}
 					catch(Exception e){
 						
 					}
+					System.out.println("File saved!");
 				}
 				if(arg0.getKeyCode()==88){
 					xmaxtemp = xmax;
@@ -224,7 +227,7 @@ public class Benoit {
 		}
 		KeyboardAction vizard =  new KeyboardAction();
 		//balrog2.run();
-		iterationcount=32;
+		iterationcount=54;
 		MouseAction demon = new MouseAction();
 		mandelbrot.addMouseListener(demon);
 		mandelbrot.addMouseMotionListener(blEeke);

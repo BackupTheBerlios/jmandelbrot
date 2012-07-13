@@ -37,8 +37,8 @@ public class DrawPanel extends JPanel {
 		static boolean julia = false;
 		static boolean block;
 		static BufferedImage bimage;
+		static Random randominstance = new Random();
 		public void paintComponent(Graphics g) {
-			Random bob = new Random();
 			Graphics2D g2d = (Graphics2D)g;
 			xpp = (Benoit.xmax - Benoit.xmin)/800;
 				ypp = (Benoit.ymax - Benoit.ymin)/800;
@@ -87,12 +87,12 @@ public class DrawPanel extends JPanel {
 								else{
 									if(block){
 										if(curcolour == 6){
-											g2d.setColor(new Color(bob.nextInt(255),bob.nextInt(255),bob.nextInt(255)));
+											g2d.setColor(new Color(randominstance.nextInt(255),randominstance.nextInt(255),randominstance.nextInt(255)));
 											g2d.fillRect(d, e, lowres? 8:1, lowres? 8:1);
 										}
 										if(curcolour == 7){
-											String bleke = String.valueOf((char) bob.nextInt(127));
-											g2d.setColor(new Color(bob.nextInt(255),bob.nextInt(255),bob.nextInt(255)));
+											String bleke = String.valueOf((char) randominstance.nextInt(127));
+											g2d.setColor(new Color(randominstance.nextInt(255),randominstance.nextInt(255),randominstance.nextInt(255)));
 											g2d.drawString(bleke, d-3,e-3);
 										}
 										
@@ -158,7 +158,6 @@ public class DrawPanel extends JPanel {
 			return Math.pow(a*a + b*b, n/2)*Math.sin(n*Math.atan(b/a));
 		}
 		static void save(String filename,int x, int y){
-			Random bob = new Random();
 		    BufferedImage bimage = new BufferedImage(x, y, BufferedImage.TYPE_INT_RGB);
 		    Graphics2D g2d = bimage.createGraphics();
 		    xpp = (Benoit.xmax - Benoit.xmin)/x;
@@ -202,7 +201,7 @@ public class DrawPanel extends JPanel {
 							catch(Exception ex){
 								
 							}
-						//g2d.setColor(new Color(bob.nextInt(255),bob.nextInt(255),bob.nextInt(255)));
+						//g2d.setColor(new Color(randominstance.nextInt(255),randominstance.nextInt(255),randominstance.nextInt(255)));
 						if(curcolour!=6){
 							g2d.fillRect(d, e, 1, 1);
 						}
