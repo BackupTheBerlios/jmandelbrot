@@ -49,24 +49,24 @@ public class DrawPanel extends JPanel {
 						for(int e = 0;e<800;){
 							g2d.setColor(new Color(0,0,0));
 							block = isInSet(conXToUnit(d),conYToUnit(e));
-							if (count == Benoit.wizard) fin = true;
+							if (count == Benoit.iterationcount) fin = true;
 							currentcolourr=(int) (4*count*count % 255);
 							currentcolourg=(int) (2*count*count*count % 255);
 							currentcolourb=(int) (4*count*count*count % 255);
-								g2d.setColor(new Color((int) ((count/(Benoit.wizard)) * 255),(int) ((count/(Benoit.wizard)) * 255),(int) ((count/(Benoit.wizard)) *255)));
+								g2d.setColor(new Color((int) ((count/(Benoit.iterationcount)) * 255),(int) ((count/(Benoit.iterationcount)) * 255),(int) ((count/(Benoit.iterationcount)) *255)));
 									mu = (count+1) - Math.log10(Math.log10(Math.sqrt(wizaredx*wizaredx + wizaredy*wizaredy)))/Math.log10(power);
 									try{
 										if(curcolour==0){
-											g2d.setColor(new Color(0,(int) (mu/Benoit.wizard * 254),(int) (mu/Benoit.wizard * 254)));
+											g2d.setColor(new Color(0,(int) (mu/Benoit.iterationcount * 254),(int) (mu/Benoit.iterationcount * 254)));
 										}
 										if(curcolour==1){
-											g2d.setColor(new Color(0,(int) (mu/Benoit.wizard * 254),0));
+											g2d.setColor(new Color(0,(int) (mu/Benoit.iterationcount * 254),0));
 										}
 										if(curcolour==2){
-											g2d.setColor(new Color((int) ((mu+1)/Benoit.wizard * 254),0,(int) (mu/Benoit.wizard * 254)));
+											g2d.setColor(new Color((int) ((mu+1)/Benoit.iterationcount * 254),0,(int) (mu/Benoit.iterationcount * 254)));
 										}
 										if(curcolour==3){
-											g2d.setColor(new Color((int) (mu/Benoit.wizard * 254),0,0));
+											g2d.setColor(new Color((int) (mu/Benoit.iterationcount * 254),0,0));
 										}
 										if(curcolour==4){
 											g2d.setColor(new Color(currentcolourr,currentcolourg,currentcolourb));
@@ -75,7 +75,7 @@ public class DrawPanel extends JPanel {
 											g2d.setColor(new Color((int) (Math.sin(count) * 127 + 127),0,0));
 										}
 										if(curcolour==8){
-											g2d.setColor(new Color((int) ((count/(Benoit.wizard)) * 255),(int) ((count/(Benoit.wizard)) * 255),(int) ((count/(Benoit.wizard)) *255)));
+											g2d.setColor(new Color((int) ((count/(Benoit.iterationcount)) * 255),(int) ((count/(Benoit.iterationcount)) * 255),(int) ((count/(Benoit.iterationcount)) *255)));
 										}
 									}
 									catch(Exception ex){
@@ -123,7 +123,7 @@ public class DrawPanel extends JPanel {
 				y = balrogey;
 				x = balrogex;
 			}
-			for(int i = 0; i<Benoit.wizard; i++){
+			for(int i = 0; i<Benoit.iterationcount; i++){
 				currentxt = (powerComplexReal(currentx, currenty, power)) + x;
 				currenty = (powerComplexImaj(currentx, currenty,power)) + y;
 				currentx=currentxt;
@@ -144,10 +144,6 @@ public class DrawPanel extends JPanel {
 		}
 		public static double conYToUnit(double ypix){
 			return (ypix * ypp) + Benoit.ymin;
-		}
-		public static void multiplyComplexNumber(double x1, double y1, double x2, double y2){
-			newx = x1*x2 - y1*y2;
-			newy = x1*y2 + x2*y1;
 		}
 		public static double powerComplexReal(double a, double b, double n){
 			if(n==2){
@@ -174,24 +170,24 @@ public class DrawPanel extends JPanel {
 				for(int e = 0;e<y;e++){
 					g2d.setColor(new Color(0,0,0));
 					block = isInSet(conXToUnit(d),conYToUnit(e));
-					if (count == Benoit.wizard) fin = true;
+					if (count == Benoit.iterationcount) fin = true;
 					currentcolourr=(int) (4*count*count % 255);
 					currentcolourg=(int) (2*count*count*count % 255);
 					currentcolourb=(int) (4*count*count*count % 255);
-						g2d.setColor(new Color((int) ((count/(Benoit.wizard)) * 255),(int) ((count/(Benoit.wizard)) * 255),(int) ((count/(Benoit.wizard)) *255)));
+						g2d.setColor(new Color((int) ((count/(Benoit.iterationcount)) * 255),(int) ((count/(Benoit.iterationcount)) * 255),(int) ((count/(Benoit.iterationcount)) *255)));
 							mu = (count+1) - Math.log10(Math.log10(Math.sqrt(wizaredx*wizaredx + wizaredy*wizaredy)))/Math.log10(power);
 							try{
 								if(curcolour==0){
-									g2d.setColor(new Color(0,(int) (mu/Benoit.wizard * 254),(int) (mu/Benoit.wizard * 254)));
+									g2d.setColor(new Color(0,(int) (mu/Benoit.iterationcount * 254),(int) (mu/Benoit.iterationcount * 254)));
 								}
 								if(curcolour==1){
-									g2d.setColor(new Color(0,(int) (mu/Benoit.wizard * 254),0));
+									g2d.setColor(new Color(0,(int) (mu/Benoit.iterationcount * 254),0));
 								}
 								if(curcolour==2){
-									g2d.setColor(new Color((int) ((mu+1)/Benoit.wizard * 254),0,(int) (mu/Benoit.wizard * 254)));
+									g2d.setColor(new Color((int) ((mu+1)/Benoit.iterationcount * 254),0,(int) (mu/Benoit.iterationcount * 254)));
 								}
 								if(curcolour==3){
-									g2d.setColor(new Color((int) (mu/Benoit.wizard * 254),0,0));
+									g2d.setColor(new Color((int) (mu/Benoit.iterationcount * 254),0,0));
 								}
 								if(curcolour==4){
 									g2d.setColor(new Color(currentcolourr,currentcolourg,currentcolourb));
@@ -200,7 +196,7 @@ public class DrawPanel extends JPanel {
 									g2d.setColor(new Color((int) (Math.sin(count) * 127 + 127),0,0));
 								}
 								if(curcolour==8){
-									g2d.setColor(new Color((int) ((count/(Benoit.wizard)) * 255),(int) ((count/(Benoit.wizard)) * 255),(int) ((count/(Benoit.wizard)) *255)));
+									g2d.setColor(new Color((int) ((count/(Benoit.iterationcount)) * 255),(int) ((count/(Benoit.iterationcount)) * 255),(int) ((count/(Benoit.iterationcount)) *255)));
 								}
 							}
 							catch(Exception ex){

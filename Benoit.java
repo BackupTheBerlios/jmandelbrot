@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.*;
+
 import java.util.Random;
 
 import javax.swing.*;
@@ -11,52 +12,42 @@ public class Benoit {
 	/**
 	 * @param args
 	 */
+	//Variables to hold the area to graph
 	static double xmax;
 	static double xmin;
 	static double ymax;
 	static double ymin;
-	static boolean clicktotoggle=false;
-	static int wizard;
-	static double xmintemp;
-	static double ymintemp;
 	static double xmaxtemp;
+	static double xmintemp;
 	static double ymaxtemp;
+	static double ymintemp;
+	//Tell whether we are graphing Julia fractals or not
+	static boolean juliamode=false;
+	static int iterationcount;
 	static JFrame framer = new JFrame();
-	static JLabel bleeking = new JLabel("  ----   PLEASE WAIT!");
 	static JLabel zoomfactor = new JLabel("Zoom factor: 1x    ");
 	static JLabel xlabel = new JLabel("J-MODE");
-	static JLabel blerk = new JLabel("z => z^" + DrawPanel.power + " + " + (DrawPanel.julia? DrawPanel.balrogex + (DrawPanel.balrogey > 0? " + ": " ") + DrawPanel.balrogey + "i" : "c") + "    " + wizard + " iterations    ");
+	static JLabel blerk = new JLabel("z => z^" + DrawPanel.power + " + " + (DrawPanel.julia? DrawPanel.balrogex + (DrawPanel.balrogey > 0? " + ": " ") + DrawPanel.balrogey + "i" : "c") + "    " + iterationcount + " iterations    ");
 	public static void main(String[] args) {
-		wizard = 1;
+		iterationcount = 1;
 		Benoit.xmax=1D;
 		Benoit.xmin=-2D;
 		Benoit.ymax=1.5D;
 		Benoit.ymin=-1.5D;
-		
-		final JFrame framer = new JFrame();
 		JPanel bob = new JPanel();
-		final JPanel buttonpane = new JPanel();
 		final JPanel labelpane = new JPanel();
-		final JButton evolve = new JButton("evolve");
-		final JButton devolve = new JButton("devolve");
 		FlowLayout blargh = new FlowLayout();
 		final Random demons = new Random();
 		//bob.setLayout(blargh);
-		framer.getContentPane().add(BorderLayout.SOUTH, buttonpane);
 		framer.getContentPane().add(BorderLayout.NORTH, labelpane);
 		framer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		labelpane.setSize(100, 800);
-		buttonpane.add(bob);
 		labelpane.add(blerk);
 		labelpane.add(zoomfactor);
-		framer.setTitle("Mandelbrot 2.3");
+		framer.setTitle("JMandelbrot prealpha");
 		labelpane.add(xlabel);
-		labelpane.add(bleeking);
-		bleeking.setVisible(false);
 		bob.setLayout(blargh);
 		bob.setMaximumSize(new Dimension(70,300));
-		bob.add(devolve);
-		bob.add(evolve);
 		xlabel.setVisible(false);
 		bob.add(xlabel);
 		final DrawPanel mandelbrot = new DrawPanel();
@@ -64,28 +55,11 @@ public class Benoit {
 		framer.getContentPane().add(mandelbrot);
 		framer.setVisible(true);
 		framer.setSize(802,900);
-		class clicklistener implements ActionListener{
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (arg0.getSource().equals(evolve)){
-					wizard = (int) ((int) wizard*1.5);
-					mandelbrot.repaint();
-					framer.requestFocus();
-				}
-				if (arg0.getSource().equals(devolve)){
-					wizard = (int) ((int) wizard/1.5);
-					mandelbrot.repaint();
-					framer.requestFocus();
-				}
-			}
-			
-		}
 		class MouseAction implements MouseListener{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				clicktotoggle=!clicktotoggle;
-				xlabel.setVisible(clicktotoggle);
+				juliamode=!juliamode;
+				xlabel.setVisible(juliamode);
 			}
 
 			@Override
@@ -119,13 +93,13 @@ public class Benoit {
 
 			@Override
 			public void mouseMoved(MouseEvent arg0) {
-				if(clicktotoggle){
+				if(juliamode){
 					DrawPanel.julia = true;
 					mousex=arg0.getX();
 					mousey=arg0.getY();
 					DrawPanel.balrogex=(float) DrawPanel.conXToUnit(mousex);
 					DrawPanel.balrogey=(float) DrawPanel.conYToUnit(mousey);
-					blerk.setText("z => z^" + DrawPanel.power +(DrawPanel.balrogex > 0? " + ": " ") + (DrawPanel.julia? DrawPanel.balrogex + (DrawPanel.balrogey > 0? " + ": " ") + DrawPanel.balrogey + "i" : " + c") + "    " + wizard + " iterations    ");
+					blerk.setText("z => z^" + DrawPanel.power +(DrawPanel.balrogex > 0? " + ": " ") + (DrawPanel.julia? DrawPanel.balrogex + (DrawPanel.balrogey > 0? " + ": " ") + DrawPanel.balrogey + "i" : " + c") + "    " + iterationcount + " iterations    ");
 					mandelbrot.repaint();
 					framer.requestFocus();
 				}
@@ -137,7 +111,8 @@ public class Benoit {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				System.out.println(arg0.getKeyCode());
+				//For development
+				//System.out.println(arg0.getKeyCode());
 				xmaxtemp = xmax;
 				xmintemp = xmin;
 				ymaxtemp = ymax;
@@ -164,11 +139,11 @@ public class Benoit {
 					DrawPanel.lowres=false;
 				}
 				if(arg0.getKeyCode()==69){
-					wizard = (int) ((int) wizard*1.6);
+					iterationcount = (int) ((int) iterationcount*1.6);
 				}
 				if(arg0.getKeyCode()==68){
-					if(wizard >2){
-						wizard = (int) ((int) wizard/1.5);
+					if(iterationcount >2){
+						iterationcount = (int) ((int) iterationcount/1.5);
 					}
 				}
 				if(arg0.getKeyCode()==83){
@@ -231,7 +206,7 @@ public class Benoit {
 				if(arg0.getKeyCode()==93){
 					DrawPanel.power+=0.01;
 				}
-				blerk.setText("z => z^" + DrawPanel.power +(DrawPanel.balrogex > 0? " + ": " ") + (DrawPanel.julia? DrawPanel.balrogex + (DrawPanel.balrogey > 0? " + ": " ") + DrawPanel.balrogey + "i" : " + c") + "    " + wizard + " iterations    ");
+				blerk.setText("z => z^" + DrawPanel.power +(DrawPanel.balrogex > 0? " + ": " ") + (DrawPanel.julia? DrawPanel.balrogex + (DrawPanel.balrogey > 0? " + ": " ") + DrawPanel.balrogey + "i" : " + c") + "    " + iterationcount + " iterations    ");
 				mandelbrot.repaint();
 			}
 
@@ -249,13 +224,10 @@ public class Benoit {
 		}
 		KeyboardAction vizard =  new KeyboardAction();
 		//balrog2.run();
-		wizard=32;
+		iterationcount=32;
 		MouseAction demon = new MouseAction();
 		mandelbrot.addMouseListener(demon);
 		mandelbrot.addMouseMotionListener(blEeke);
-		clicklistener balrog = new clicklistener();
-		evolve.addActionListener(balrog);
-		devolve.addActionListener(balrog);
 		framer.addKeyListener(vizard);
 		framer.setFocusable(true);
 		framer.setFocusableWindowState(true);
